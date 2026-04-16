@@ -22,6 +22,8 @@ function Projects() {
                 src={project.image}
                 alt={`${project.title} project preview`}
                 className="h-56 w-full object-cover transition duration-500 group-hover:scale-105"
+                loading="lazy"
+                decoding="async"
               />
               <div className="p-6">
                 <div className="mb-4 flex items-center gap-3">

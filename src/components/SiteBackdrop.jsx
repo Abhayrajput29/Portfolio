@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion';
 
+import React, { memo } from 'react';
+
 function SiteBackdrop() {
   return (
     <div className="site-backdrop" aria-hidden="true">
@@ -17,4 +19,4 @@ function SiteBackdrop() {
   );
 }
 
-export default SiteBackdrop;
+export default memo(SiteBackdrop);

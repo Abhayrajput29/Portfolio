@@ -21,7 +21,7 @@ function AppleIntelligenceRipple() {
       {show && (
         <motion.div
           key="apple-ripple-container"
-          className="pointer-events-none fixed inset-0 z-[9990] flex items-center justify-center overflow-hidden mix-blend-screen"
+          className="pointer-events-none fixed inset-0 z-[9990] flex items-center justify-center overflow-hidden"
         >
           {/* Base intense glow that flashes instantly */}
           <motion.div

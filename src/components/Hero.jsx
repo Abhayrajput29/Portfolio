@@ -1,4 +1,5 @@
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 import { FiArrowRight, FiGithub, FiLinkedin } from 'react-icons/fi';
 import { FaJava, FaPython } from 'react-icons/fa';
 import { SiPostgresql, SiReact, SiSpringboot } from 'react-icons/si';
@@ -35,6 +36,7 @@ const itemVariants = {
 };
 
 function Hero() {
+  const [zoomedImage, setZoomedImage] = useState(null);
   const typedText = useTypingEffect(heroWords);
 
   return (
@@ -82,6 +84,35 @@ function Hero() {
         animate="visible"
       >
         <div>
+          <motion.div variants={itemVariants} className="mb-6 flex flex-wrap gap-4 items-center justify-start max-w-full">
+            <motion.img 
+              layoutId="img-1"
+              src="/me.jpg" 
+              alt={profile.name} 
+              className="cursor-zoom-in w-32 h-36 sm:w-44 sm:h-44 rounded-3xl object-cover border-[3px] border-teal-500/30 dark:border-mint/50 shadow-2xl" 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={() => setZoomedImage({ id: 'img-1', src: '/me.jpg', border: 'border-teal-500/30 dark:border-mint/50' })}
+            />
+            <motion.img 
+              layoutId="img-2"
+              src="/me2.jpg" 
+              alt={profile.name} 
+              className="cursor-zoom-in w-32 h-36 sm:w-44 sm:h-44 rounded-3xl object-cover border-[3px] border-amber-500/30 dark:border-amber-500/50 shadow-2xl" 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={() => setZoomedImage({ id: 'img-2', src: '/me2.jpg', border: 'border-amber-500/30 dark:border-amber-500/50' })}
+            />
+            <motion.img
+              layoutId="img-3"
+              src="/cat.png" 
+              alt="Cat" 
+              className="cursor-zoom-in w-20 h-36 sm:w-24 sm:h-44 rounded-3xl object-cover border-[3px] border-rose-500/30 dark:border-rose-500/50 shadow-2xl" 
+              whileHover={{ scale: 1.05 }}
+              transition={{ type: "spring", damping: 25, stiffness: 300 }}
+              onClick={() => setZoomedImage({ id: 'img-3', src: '/cat.png', border: 'border-rose-500/30 dark:border-rose-500/50' })}
+            />
+          </motion.div>
           <motion.p variants={itemVariants} className="mb-5 inline-flex rounded-full border border-teal-500/30 bg-teal-500/5 dark:border-white/20 dark:bg-white/10 px-4 py-2 text-sm font-semibold text-teal-700 dark:text-mint backdrop-blur">
             Building production-grade projects while pursuing CSE (2023-2027)
           </motion.p>
@@ -183,6 +214,31 @@ function Hero() {
           />
         </div>
       </motion.div>
+
+      {/* Zoom Popup Overlay */}
+      <AnimatePresence>
+        {zoomedImage && (
+          <>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setZoomedImage(null)}
+              className="fixed inset-0 z-[100] bg-black/60 backdrop-blur-md cursor-zoom-out"
+            />
+            <div className="fixed inset-0 z-[101] flex items-center justify-center pointer-events-none p-4">
+              <motion.img
+                layoutId={zoomedImage.id}
+                src={zoomedImage.src} 
+                alt="Zoomed" 
+                className={`pointer-events-auto cursor-zoom-out w-auto h-auto max-w-[90vw] max-h-[85vh] rounded-[2rem] object-cover border-4 ${zoomedImage.border} shadow-2xl`} 
+                transition={{ type: "spring", damping: 25, stiffness: 300 }}
+                onClick={() => setZoomedImage(null)}
+              />
+            </div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }

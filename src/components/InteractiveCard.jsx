@@ -51,7 +51,7 @@ function InteractiveCard({ children, className = '', as = 'div', delay = 0 }) {
         }}
       />
       <motion.div
-        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition duration-300 group-hover:opacity-100 mix-blend-overlay dark:mix-blend-color-dodge"
+        className="pointer-events-none absolute -inset-px rounded-lg opacity-0 transition duration-300 group-hover:opacity-100"
         style={{
           background: useMotionTemplate`
             radial-gradient(
@@ -64,13 +64,13 @@ function InteractiveCard({ children, className = '', as = 'div', delay = 0 }) {
       />
       {/* Glare Sheen mimicking physical glass */}
       <motion.div 
-        className="pointer-events-none absolute inset-0 z-20 rounded-lg opacity-0 transition duration-300 group-hover:opacity-50 mix-blend-overlay"
+        className="pointer-events-none absolute inset-0 z-20 rounded-lg opacity-0 transition duration-300 group-hover:opacity-50"
         style={{
           background: useMotionTemplate`
             linear-gradient(
               105deg,
               transparent 20%,
-              rgba(255, 255, 255, 0.4) ${useTransform(pointerX, [-0.5, 0.5], [-20, 120])}%,
+              rgba(255, 255, 255, 0.3) ${useTransform(pointerX, [-0.5, 0.5], [-20, 120])}%,
               transparent 80%
             )
           `
