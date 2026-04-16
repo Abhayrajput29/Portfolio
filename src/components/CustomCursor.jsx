@@ -46,29 +46,29 @@ const CustomCursor = () => {
 
   const variants = {
     default: {
-      height: 32,
-      width: 32,
+      height: 24,
+      width: 24,
       x: '-50%',
       y: '-50%',
       backgroundColor: 'transparent',
-      border: '2px solid rgba(45, 212, 191, 0.8)', // teal-400 equivalent
+      border: '1px solid rgba(45, 212, 191, 0.7)',
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 20,
+        stiffness: 400,
+        damping: 25,
       },
     },
     hover: {
-      height: 64,
-      width: 64,
+      height: 48,
+      width: 48,
       x: '-50%',
       y: '-50%',
-      backgroundColor: 'rgba(45, 212, 191, 0.15)',
-      border: '1px solid rgba(45, 212, 191, 0.3)',
+      backgroundColor: 'rgba(45, 212, 191, 0.1)',
+      border: '1px solid rgba(45, 212, 191, 0.2)',
       transition: {
         type: 'spring',
-        stiffness: 300,
-        damping: 20,
+        stiffness: 400,
+        damping: 25,
       },
     },
   };

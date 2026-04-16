@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { FiMoon, FiSun } from 'react-icons/fi';
 
 function ThemeToggle({ theme, setTheme }) {
@@ -8,9 +9,24 @@ function ThemeToggle({ theme, setTheme }) {
       type="button"
       aria-label="Toggle color theme"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
-      className="grid h-10 w-10 place-items-center rounded-md border border-zinc-300/60 bg-white/70 text-zinc-900 transition hover:-translate-y-0.5 hover:border-mint hover:text-teal-600 dark:border-white/15 dark:bg-white/10 dark:text-white dark:hover:text-mint"
+      className={`flex h-8 w-[60px] items-center rounded-full border p-1 transition-colors duration-500 ${
+        isDark ? 'border-white/10 bg-zinc-800' : 'border-zinc-300 bg-zinc-200'
+      }`}
+      style={{ justifyContent: isDark ? 'flex-end' : 'flex-start' }}
     >
-      {isDark ? <FiSun /> : <FiMoon />}
+      <motion.div
+        layout
+        transition={{
+          type: 'spring',
+          bounce: 0.5,
+          duration: 0.6
+        }}
+        className={`flex h-6 w-6 items-center justify-center rounded-full shadow-md ${
+          isDark ? 'bg-zinc-950 text-mint shadow-mint/20' : 'bg-white text-amber-500'
+        }`}
+      >
+        {isDark ? <FiMoon size={14} /> : <FiSun size={14} />}
+      </motion.div>
     </button>
   );
 }

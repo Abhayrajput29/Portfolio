@@ -1,4 +1,5 @@
 import emailjs from '@emailjs/browser';
+import confetti from 'canvas-confetti';
 import { useRef, useState } from 'react';
 import { FiGithub, FiLinkedin, FiMail, FiMapPin, FiSend } from 'react-icons/fi';
 import { profile } from '../assets/data.js';
@@ -32,6 +33,21 @@ function Contact() {
     try {
       await emailjs.sendForm(serviceId, templateId, formRef.current, { publicKey });
       formRef.current.reset();
+
+      // Get exact coordinates of the submit button to shoot confetti from it
+      const submitter = event.nativeEvent.submitter;
+      const originX = submitter ? (submitter.getBoundingClientRect().left + submitter.getBoundingClientRect().width / 2) / window.innerWidth : 0.5;
+      const originY = submitter ? (submitter.getBoundingClientRect().top + submitter.getBoundingClientRect().height / 2) / window.innerHeight : 0.6;
+
+      // Trigger Confetti Explosion
+      confetti({
+        particleCount: 120,
+        spread: 80,
+        origin: { x: originX, y: originY },
+        colors: ['#2dd4bf', '#fb7185', '#f59e0b', '#ffffff'], // Match UI theme
+        disableForReducedMotion: true
+      });
+
       setStatus({ type: 'success', message: 'Message sent. I will get back to you soon.' });
     } catch {
       setStatus({ type: 'error', message: 'Something went wrong. Please try again in a moment.' });

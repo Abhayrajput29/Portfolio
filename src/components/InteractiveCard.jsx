@@ -62,6 +62,20 @@ function InteractiveCard({ children, className = '', as = 'div', delay = 0 }) {
           `,
         }}
       />
+      {/* Glare Sheen mimicking physical glass */}
+      <motion.div 
+        className="pointer-events-none absolute inset-0 z-20 rounded-lg opacity-0 transition duration-300 group-hover:opacity-50 mix-blend-overlay"
+        style={{
+          background: useMotionTemplate`
+            linear-gradient(
+              105deg,
+              transparent 20%,
+              rgba(255, 255, 255, 0.4) ${useTransform(pointerX, [-0.5, 0.5], [-20, 120])}%,
+              transparent 80%
+            )
+          `
+        }}
+      />
       <div className="relative z-10" style={{ transform: 'translateZ(25px)' }}>
         {children}
       </div>
