@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+    font-family: Manrope, ui-sans-serif, system-ui, sans-serif;
+    --bg-color: #fafafa;
+    --text-color: #09090b;
+    --line-teal: rgba(45, 212, 191, 0.06);
+    --line-rose: rgba(251, 113, 133, 0.05);
+  }
+
+  :root.dark {
+    color-scheme: dark;
+    --bg-color: #070707;
+    --text-color: #e9f4f1;
+    --line-teal: rgba(45, 212, 191, 0.04);
+    --line-rose: rgba(251, 113, 133, 0.035);
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    overflow-x: hidden;
+    color: var(--text-color);
+    background:
+      linear-gradient(90deg, var(--line-teal) 1px, transparent 1px),
+      linear-gradient(0deg, var(--line-rose) 1px, transparent 1px),
+      var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-size: 64px 64px;
+    @apply md:cursor-none;
+  }
+
+  @media (min-width: 768px) {
+    a, button, input, textarea, select {
+      cursor: none !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: Sora, ui-sans-serif, system-ui, sans-serif;
+  }
+
+  a,
+  button,
+  input,
+  textarea {
+    outline-color: #2dd4bf;
+  }
+}
+
+@layer components {
+  .section-space {
+    @apply py-20 sm:py-24;
+  }
+
+  .glass-panel {
+    @apply rounded-lg border border-zinc-300/70 bg-white/75 shadow-glow backdrop-blur-xl transition dark:border-white/10 dark:bg-white/[0.07];
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 24px 70px rgba(0, 0, 0, 0.18);
+  }
+
+  .depth-card {
+    @apply relative transform-gpu overflow-hidden;
+    perspective: 900px;
+  }
+
+  .depth-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(115deg, rgba(45, 212, 191, 0.18), transparent 34%),
+      linear-gradient(245deg, rgba(251, 191, 36, 0.12), transparent 38%);
+    opacity: 0;
+    transition: opacity 220ms ease;
+    pointer-events: none;
+  }
+
+  .depth-card::after {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    border-radius: 7px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+
+  .depth-card:hover::before {
+    opacity: 1;
+  }
+
+  .icon-tile {
+    @apply inline-grid h-11 w-11 place-items-center rounded-md border border-teal-500/30 bg-teal-500/10 text-xl text-mint dark:border-white/10 dark:bg-white/10;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .icon-tile--large {
+    @apply h-14 w-14;
+  }
+
+  .btn-primary {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-md bg-mint px-6 py-3 font-bold text-ink transition hover:-translate-y-1 hover:bg-teal-300 disabled:cursor-not-allowed disabled:opacity-70;
+  }
+
+  .btn-secondary {
+    @apply inline-flex min-h-12 items-center justify-center rounded-md border border-white/30 px-6 py-3 font-bold text-white transition hover:-translate-y-1 hover:border-mint hover:text-mint;
+  }
+
+  .btn-ghost {
+    @apply inline-flex min-h-12 items-center gap-2 rounded-md px-6 py-3 font-bold text-zinc-200 transition hover:-translate-y-1 hover:text-mint;
+  }
+
+  .btn-small {
+    @apply inline-flex items-center gap-2 rounded-md border border-zinc-300/70 px-4 py-2 text-sm font-bold text-zinc-800 transition hover:-translate-y-1 hover:border-mint hover:text-teal-700 dark:border-white/10 dark:text-zinc-100 dark:hover:text-mint;
+  }
+
+  .contact-link {
+    @apply flex items-center gap-3 rounded-md border border-zinc-300/70 px-4 py-3 font-semibold text-zinc-700 transition hover:-translate-y-1 hover:border-mint hover:text-teal-700 dark:border-white/10 dark:text-zinc-200 dark:hover:text-mint;
+  }
+
+  .form-field {
+    @apply grid gap-2 text-sm font-semibold text-zinc-700 dark:text-zinc-200;
+  }
+
+  .form-field input,
+  .form-field textarea {
+    @apply w-full rounded-md border border-zinc-300 bg-white px-4 py-3 text-base font-medium text-zinc-950 transition placeholder:text-zinc-500 focus:border-mint dark:border-white/10 dark:bg-ink/70 dark:text-white;
+  }
+
+  .site-backdrop {
+    @apply pointer-events-none fixed inset-0 z-0 overflow-hidden;
+    background:
+      linear-gradient(135deg, rgba(45, 212, 191, 0.08), transparent 28%),
+      linear-gradient(315deg, rgba(251, 113, 133, 0.06), transparent 32%);
+    opacity: 0.8;
+  }
+
+  .site-backdrop__track {
+    position: absolute;
+    inset: -10% -20%;
+    background-image:
+      repeating-linear-gradient(90deg, rgba(45, 212, 191, 0.08) 0 1px, transparent 1px 120px),
+      repeating-linear-gradient(0deg, rgba(251, 191, 36, 0.06) 0 1px, transparent 1px 120px);
+    transform: rotate(-8deg);
+    mask-image: linear-gradient(to bottom, transparent, black 18%, black 72%, transparent);
+  }
+
+  .site-backdrop__track--two {
+    transform: rotate(7deg);
+    opacity: 0.45;
+  }
+}
